@@ -4,12 +4,13 @@ import time
 
 class Kumanda():
 
-    def __init__(self,tv_durumu="Kapalı",ses_durumu=0,kanal_listesi=["Trt"],kanal="Trt"):
+    def __init__(self,tv_durumu="Kapalı",ses_durumu=0,kanal_listesi=["Trt"],kanal="Trt",parlaklık_durumu=50):
 
         self.tv_durumu = tv_durumu
         self.ses_durumu = ses_durumu
         self.kanal_listesi = kanal_listesi
         self.kanal = kanal
+        self.parlaklık_durumu = parlaklık_durumu
 
     def tv_aç(self):
 
@@ -68,11 +69,37 @@ class Kumanda():
 
         print("Kanal:",self.kanal)
 
+    def parlaklık(self):
+
+        while True:
+
+          parlak = input("Parlaklığı artırmak için '+' tuşuna,azaltmak için '-' tuşuna basınız.\nParlaklık:")
+
+          if parlak=="+":
+              if self.parlaklık_durumu != 100:
+                 self.parlaklık_durumu += 10
+                 print("Parlaklık artırılıyor...")
+                 time.sleep(1)
+                 print("Güncel Parlaklık:%{}".format(self.parlaklık_durumu))
+
+
+          elif parlak == "-":
+              if self.parlaklık_durumu != 0:
+                 self.parlaklık_durumu -= 10
+                 print("Parlaklık azaltılıyor...")
+                 time.sleep(1)
+                 print("Güncel Parlaklık:%{}".format(self.parlaklık_durumu))
+
+          else:
+               print("Geçersiz işlem...")
+               break
+
+
     def __len__(self):
         return len(self.kanal_listesi)
 
     def __str__(self):
-        return "Tv Durumu:{} \n Ses Durumu:{} \n Kanal:{} \n Kanal Listesi:{}".format(self.tv_durumu,self.ses_durumu,self.kanal,self.kanal_listesi)
+        return "Tv Durumu:{} \n Ses Durumu:{} \n Kanal:{} \n Kanal Listesi:{} \n Parlaklık:{}".format(self.tv_durumu,self.ses_durumu,self.kanal,self.kanal_listesi,self.parlaklık_durumu)
 
 kumanda=Kumanda()
 
@@ -86,7 +113,8 @@ Kumanda Uygulaması
 5)Kanal sayısı
 6)Kanal listesi
 7)Rastgele kanala geçme
-8)Televizyon bilgileri
+8)Parlaklık durumu
+9)Televizyon bilgileri
 
 """
 
@@ -122,6 +150,9 @@ while True:
         kumanda.rastgele_kanal()
 
     elif işlem==8:
+        kumanda.parlaklık()
+
+    elif işlem==9:
         print(kumanda)
 
     else:
