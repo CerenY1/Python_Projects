@@ -5,15 +5,9 @@ from bs4 import BeautifulSoup
 url = "https://kur.doviz.com/"
 response = requests.get(url)
 
-html_content = response.content   #sayfanın html içeriği gelir.
+html_content = response.content   
 
-soup = BeautifulSoup(html_content,"html.parser")    #html sayfasını parçalar ve daha güzel görünmesini sağlar.
-
-#print(soup.prettify()) 
-#HTML ve XML gibi yapılandırılmış metin verileri, genellikle birçok iç içe geçmiş etiket ve düzensiz boşluklar içerebilir. soup.prettify() işlevi, bu veriyi girintileme kullanarak daha okunabilir ve düzenli hale getirir.
-
-"""for i in soup.find_all("a"):
-    print(i.text)"""
+soup = BeautifulSoup(html_content,"html.parser")   
 
 name = soup.find_all("span",{"class":"name"})
 value = soup.find_all("span",{"class": "value"})
